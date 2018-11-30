@@ -40,7 +40,7 @@ class Player {
       let card1value = this.toValue(cards[0]);
       let card2value = this.toValue(cards[1]);
       if (card1value === card2value) {
-        return 20;
+        return 25;
       }
       else if (cards[0].suit === cards[1].suit) {
         return 15;
@@ -91,6 +91,9 @@ class Player {
     }
     else if (score >= 30) {
       bet(this.raiseOrMaxStack(gameState.minimum_raise + score * MIN_BET * 8 * multiplier, player));
+    }
+    else if (score >= 25) {
+      bet(this.raiseOrMaxStack(gameState.minimum_raise + MIN_BET * 6 * multiplier, player));
     }
     else if (score >= 20) {
       bet(this.raiseOrMaxStack(gameState.minimum_raise + MIN_BET * 4 * multiplier, player));
