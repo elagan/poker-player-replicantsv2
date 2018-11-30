@@ -70,10 +70,10 @@ class Player {
       bet(player.stack);
     }
     else if (score >= 3) {
-      bet(gameState.minimum_raise + score * MIN_BET * 8);
+      bet(this.raiseOrMaxStack(gameState.minimum_raise + score * MIN_BET * 8, player));
     }
     else if (score >= 2) {
-      bet(gameState.minimum_raise + MIN_BET * 4);
+      bet(this.raiseOrMaxStack(gameState.minimum_raise + MIN_BET * 4, player));
     }
     else if (score >= 1 && gameState.current_buy_in <= 150) {
       bet(gameState.current_buy_in);
@@ -81,6 +81,10 @@ class Player {
     else {
       bet(0);
     }
+  }
+
+  static raiseOrMaxStack(bet, player) {
+    return Math.min([bet, player.stack]);
   }
 
   static showdown(gameState) {
