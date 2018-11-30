@@ -74,7 +74,7 @@ class Player {
     else if (score >= 2) {
       bet(gameState.minimum_raise);
     }
-    else if (score >= 1 && gameState.current_buy_in <= 50) {
+    else if (score >= 1 && gameState.current_buy_in <= 150) {
       bet(gameState.current_buy_in);
     }
     else {
