@@ -3,7 +3,7 @@ const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
-    return '0.16';
+    return '0.17';
   }
 
   static getRank(gameState) {
@@ -21,10 +21,12 @@ class Player {
     try {
       let res = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(cards));
       let sharedHand = JSON.parse(res.getBody('utf-8'));
-      let res2 = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(gameState.community_cards));
-      let ourHand = JSON.parse(res2.getBody('utf-8'));
-      if (ourHand.rank > sharedHand.rank) {
-        return ourHand.rank * 15;
+      if (gameState.community_cards.length > 4) {
+        let res2 = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(gameState.community_cards));
+        let ourHand = JSON.parse(res2.getBody('utf-8'));
+        if (ourHand.rank > sharedHand.rank) {
+          return ourHand.rank * 15;
+        }
       }
       return sharedHand.rank * 10;
     } catch (e) {
