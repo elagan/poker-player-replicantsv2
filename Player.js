@@ -40,7 +40,7 @@ class Player {
       let card1value = this.toValue(cards[0]);
       let card2value = this.toValue(cards[1]);
       if (card1value > 10 || card2value > 10) {
-        return card1value + card2value;
+        return (0 + card1value) + (0 + card2value);
       } else if (card1value === card2value) {
         return 20;
       } else if (cards[0].suit === cards[1].suit) {
