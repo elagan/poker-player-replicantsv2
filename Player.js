@@ -3,7 +3,7 @@ const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
-    return '0.18';
+    return '0.19';
   }
 
   static getRank(gameState) {
@@ -82,7 +82,13 @@ class Player {
 
     console.log("stacks", stacks);
     if (player.stack > 3000) {
-      bet(player.stack);
+      let max = 0;
+      stacks.forEach(stack => {
+        if (stack !== player.stack && stack > max) {
+          max = stack;
+        }
+      });
+      bet(max);
     }
     else if (player.stack <= 100) {
       bet(player.stack);
