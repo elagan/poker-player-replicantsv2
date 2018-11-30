@@ -65,7 +65,7 @@ class Player {
   static betRequest(gameState, bet) {
     let player = gameState.players[gameState.in_action];
     let score = this.rateCards(gameState);
-    if (score >= 1 && gameState.current_buy_in <= 20) {
+    if (score >= 1 && gameState.current_buy_in <= 50) {
       bet(gameState.current_buy_in);
     }
     else if (score >= 2) {
