@@ -68,7 +68,7 @@ class Player {
     let score = this.rateCards(gameState);
     let multiplier = player.stack >= 2000 ? 2 : 1;
     if (player.stack > 3000) {
-      console.log(stacks);
+      console.log("stacks", stacks);
       bet(player.stack);
     }
     else if (player.stack <= 100) {
