@@ -87,7 +87,7 @@ class Player {
   }
 
   static raiseOrMaxStack(bet, player) {
-    console.log(player);
+    console.log("test test ", player);
 
     if (player.stack > bet) {
       return bet;
