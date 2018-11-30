@@ -7,6 +7,16 @@ class Player {
 
   static getRank(gameState) {
     let cards = gameState.community_cards.concat(gameState.players[gameState.in_action].hole_cards);
+    if (cards.length < 7) {
+      let suits = {"diamonds": 0, "hearts": 1, "clubs": 2, "spades": 3};
+      let suitCount = [0, 0, 0, 0];
+      cards.forEach(card => {
+        suitCount[suits[card.suit]] += 1;
+      });
+      if (Math.max(suitCount) >= 4) {
+        return 1;
+      }
+    }
     console.log(cards);
     try {
       let res = request('GET', 'http://rainman.leanpoker.org/rank?cards='+JSON.stringify(cards));
@@ -55,7 +65,7 @@ class Player {
   static betRequest(gameState, bet) {
     let player = gameState.players[gameState.in_action];
     let score = this.rateCards(gameState);
-    if (score >= 1 && gameState.current_buy_in <= 10) {
+    if (score >= 1 && gameState.current_buy_in <= 20) {
       bet(gameState.current_buy_in);
     }
     else if (score >= 2) {
