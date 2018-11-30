@@ -84,6 +84,7 @@ class Player {
   }
 
   static showdown(gameState) {
+    console.log(gameState);
   }
 }
 
