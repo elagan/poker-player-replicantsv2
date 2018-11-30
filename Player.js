@@ -3,7 +3,7 @@ const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
-    return '0.7';
+    return '0.8';
   }
 
   static getRank(gameState) {
@@ -75,6 +75,7 @@ class Player {
     let score = this.rateCards(gameState);
     console.log("score", score);
     let multiplier = player.stack >= 2000 ? 2 : 1;
+
     if (player.stack > 3000) {
       console.log("stacks", stacks);
       bet(player.stack);
@@ -103,6 +104,7 @@ class Player {
   }
 
   static raiseOrMaxStack(bet, player) {
+    console.log("min", Math.min([bet, 0 + player.stack]));
     if (player.stack > bet) {
       return bet;
     }
