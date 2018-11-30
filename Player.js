@@ -3,7 +3,7 @@ const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
-    return '0.8';
+    return '0.9';
   }
 
   static getRank(gameState) {
@@ -40,7 +40,7 @@ class Player {
       let card1value = this.toValue(cards[0]);
       let card2value = this.toValue(cards[1]);
       if (card1value > 10 || card2value > 10) {
-        return (0 + card1value) + (0 + card2value);
+        return ;
       } else if (card1value === card2value) {
         return 20;
       } else if (cards[0].suit === cards[1].suit) {
@@ -66,7 +66,7 @@ class Player {
     else if (card.rank === "A") {
       return 14;
     }
-    return 0 + card.rank;
+    return parseInt(card.rank);
   }
 
   static betRequest(gameState, bet) {
