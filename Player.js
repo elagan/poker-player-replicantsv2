@@ -72,7 +72,7 @@ class Player {
       bet(gameState.minimum_raise);
     }
     else if (score >= 3) {
-      bet(gameState.minimum_raise + score * gameState.small_blind * 2);
+      bet(gameState.minimum_raise + score * gameState.small_blind * 4);
     }
     else if (score >= 7) {
       bet(player.stack);
