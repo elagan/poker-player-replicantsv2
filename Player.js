@@ -34,7 +34,7 @@ class Player {
   }
 
   static rateCards(gameState) {
-    if (gameState.community_cards.length < 3) {
+    if (gameState.community_cards.length < 4) {
       let player = gameState.players[gameState.in_action];
       let cards = player.hole_cards;
       let card1value = this.toValue(cards[0]);
