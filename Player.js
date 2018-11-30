@@ -1,4 +1,5 @@
 const request = require('sync-request');
+const MIN_BET = 10;
 
 class Player {
   static get VERSION() {
@@ -69,10 +70,10 @@ class Player {
       bet(player.stack);
     }
     else if (score >= 3) {
-      bet(gameState.minimum_raise + score * gameState.small_blind * 8);
+      bet(gameState.minimum_raise + score * MIN_BET * 8);
     }
     else if (score >= 2) {
-      bet(gameState.minimum_raise + gameState.small_blind * 4);
+      bet(gameState.minimum_raise + MIN_BET * 4);
     }
     else if (score >= 1 && gameState.current_buy_in <= 150) {
       bet(gameState.current_buy_in);
