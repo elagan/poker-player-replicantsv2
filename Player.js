@@ -19,7 +19,7 @@ class Player {
     }
     console.log(cards);
     try {
-      let res = request('GET', 'http://rainman.leanpoker.org/rank?cards='+JSON.stringify(cards));
+      let res = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(cards));
       let a = JSON.parse(res.getBody('utf-8'));
       return 0 + a.rank;
     } catch (e) {
@@ -65,17 +65,17 @@ class Player {
   static betRequest(gameState, bet) {
     let player = gameState.players[gameState.in_action];
     let score = this.rateCards(gameState);
-    if (score >= 1 && gameState.current_buy_in <= 50) {
-      bet(gameState.current_buy_in);
-    }
-    else if (score >= 2) {
-      bet(gameState.minimum_raise);
+    if (score >= 7) {
+      bet(player.stack);
     }
     else if (score >= 3) {
       bet(gameState.minimum_raise + score * gameState.small_blind * 4);
     }
-    else if (score >= 7) {
-      bet(player.stack);
+    else if (score >= 2) {
+      bet(gameState.minimum_raise);
+    }
+    else if (score >= 1 && gameState.current_buy_in <= 50) {
+      bet(gameState.current_buy_in);
     }
     else {
       bet(0);
