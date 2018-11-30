@@ -96,9 +96,6 @@ class Player {
     else if (score >= 20) {
       bet(this.raiseOrMaxStack(gameState.minimum_raise + MIN_BET * 4 * multiplier, player));
     }
-    else if (score >= 15) {
-      bet(this.raiseOrMaxStack(gameState.current_buy_in + MIN_BET * 3, player));
-    }
     else if (score >= 10 && gameState.current_buy_in <= 150) {
       bet(this.raiseOrMaxStack(MIN_BET, player));
     }
