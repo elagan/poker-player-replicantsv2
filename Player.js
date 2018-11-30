@@ -66,7 +66,10 @@ class Player {
   static betRequest(gameState, bet) {
     let player = gameState.players[gameState.in_action];
     let score = this.rateCards(gameState);
-    if (score >= 7) {
+    if (player.stack > 3000) {
+      bet(player.stack);
+    }
+    else if (score >= 7) {
       bet(player.stack);
     }
     else if (score >= 3) {
@@ -76,7 +79,7 @@ class Player {
       bet(this.raiseOrMaxStack(gameState.minimum_raise + MIN_BET * 4, player));
     }
     else if (score >= 1 && gameState.current_buy_in <= 150) {
-      bet(gameState.current_buy_in);
+      bet(this.raiseOrMaxStack(gameState.current_buy_in, player));
     }
     else {
       bet(0);
