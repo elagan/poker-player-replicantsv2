@@ -64,9 +64,14 @@ class Player {
 
   static betRequest(gameState, bet) {
     let player = gameState.players[gameState.in_action];
+    let stacks =gameState.players.map(player => player.stack);
     let score = this.rateCards(gameState);
     let multiplier = player.stack >= 2000 ? 2 : 1;
-    if (player.stack > 3000 || player.stack <= 100) {
+    if (player.stack > 3000) {
+      console.log(stacks);
+      bet(player.stack);
+    }
+    else if (player.stack <= 100) {
       bet(player.stack);
     }
     else if (score >= 70) {
