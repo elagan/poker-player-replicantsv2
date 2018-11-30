@@ -20,13 +20,13 @@ class Player {
     }
     try {
       let res = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(cards));
-      let a = JSON.parse(res.getBody('utf-8'));
+      let communityHand = JSON.parse(res.getBody('utf-8'));
       let res2 = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(gameState.community_cards));
-      let a2 = JSON.parse(res2.getBody('utf-8'));
-      if (a2.rank > a.rank) {
-        return a2.rank * 15;
+      let ourHand = JSON.parse(res2.getBody('utf-8'));
+      if (ourHand.rank > communityHand.rank) {
+        return ourHand.rank * 15;
       }
-      return a.rank * 10;
+      return communityHand.rank * 10;
     } catch (e) {
       console.error(e);
     }
@@ -73,6 +73,7 @@ class Player {
     let player = gameState.players[gameState.in_action];
     let stacks = gameState.players.map(player => player.stack);
     let score = this.rateCards(gameState);
+    console.log("score", score);
     let multiplier = player.stack >= 2000 ? 2 : 1;
     if (player.stack > 3000) {
       console.log("stacks", stacks);
@@ -91,7 +92,7 @@ class Player {
       bet(this.raiseOrMaxStack(gameState.minimum_raise + MIN_BET * 4 * multiplier, player));
     }
     else if (score >= 15) {
-      bet(this.raiseOrMaxStack(gameState.current_buy_in + MIN_BET * 4, player));
+      bet(this.raiseOrMaxStack(gameState.current_buy_in + MIN_BET * 3, player));
     }
     else if (score >= 10 && gameState.current_buy_in <= 150) {
       bet(this.raiseOrMaxStack(MIN_BET, player));
