@@ -3,7 +3,7 @@ const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
-    return '0.19';
+    return '0.20';
   }
 
   static getRank(gameState) {
@@ -80,7 +80,6 @@ class Player {
     let score = this.rateCards(gameState);
     let multiplier = player.stack >= 2000 ? 2 : 1;
 
-    console.log("stacks", stacks);
     if (player.stack > 3000) {
       let max = 0;
       stacks.forEach(stack => {
