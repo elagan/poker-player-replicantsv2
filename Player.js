@@ -66,7 +66,7 @@ class Player {
     else if (card.rank === "A") {
       return 14;
     }
-    console.log(card.rank, parseInt(card.rank));
+    console.log("rank", card.rank, parseInt(card.rank));
     return parseInt(card.rank);
   }
 
