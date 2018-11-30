@@ -3,7 +3,7 @@ const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
-    return '0.11';
+    return '0.12';
   }
 
   static getRank(gameState) {
