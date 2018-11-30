@@ -21,7 +21,7 @@ class Player {
     try {
       let res = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(cards));
       let sharedHand = JSON.parse(res.getBody('utf-8'));
-      if (gameState.community_cards.length > 4) {
+      if (gameState.community_cards.length >= 5) {
         let res2 = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(gameState.community_cards));
         let ourHand = JSON.parse(res2.getBody('utf-8'));
         if (ourHand.rank > sharedHand.rank) {
