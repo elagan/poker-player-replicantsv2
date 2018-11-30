@@ -87,7 +87,10 @@ class Player {
   }
 
   static raiseOrMaxStack(bet, player) {
-    return Math.min([bet, player.stack]);
+    if (player.stack > bet) {
+      return bet;
+    }
+    return player.stack;
   }
 
   static showdown(gameState) {
