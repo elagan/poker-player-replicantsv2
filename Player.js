@@ -3,7 +3,7 @@ const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
-    return '0.1';
+    return '0.2';
   }
 
   static getRank(gameState) {
@@ -64,7 +64,7 @@ class Player {
 
   static betRequest(gameState, bet) {
     let player = gameState.players[gameState.in_action];
-    let stacks =gameState.players.map(player => player.stack);
+    let stacks = gameState.players.map(player => player.stack);
     let score = this.rateCards(gameState);
     let multiplier = player.stack >= 2000 ? 2 : 1;
     if (player.stack > 3000) {
@@ -82,6 +82,9 @@ class Player {
     }
     else if (score >= 20) {
       bet(this.raiseOrMaxStack(gameState.minimum_raise + MIN_BET * 4 * multiplier, player));
+    }
+    else if (score >= 15) {
+      bet(this.raiseOrMaxStack(gameState.current_buy_in + MIN_BET * 4, player));
     }
     else if (score >= 10 && gameState.current_buy_in <= 150) {
       bet(this.raiseOrMaxStack(MIN_BET, player));
