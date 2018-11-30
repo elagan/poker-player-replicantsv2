@@ -3,7 +3,7 @@ const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
-    return '0.2';
+    return '0.3';
   }
 
   static getRank(gameState) {
@@ -102,7 +102,6 @@ class Player {
   }
 
   static showdown(gameState) {
-    console.log(gameState);
   }
 }
 
