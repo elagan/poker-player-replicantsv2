@@ -3,7 +3,7 @@ const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
-    return '0.12';
+    return '0.13';
   }
 
   static getRank(gameState) {
@@ -20,13 +20,13 @@ class Player {
     }
     try {
       let res = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(cards));
-      let communityHand = JSON.parse(res.getBody('utf-8'));
+      let sharedHand = JSON.parse(res.getBody('utf-8'));
       let res2 = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(gameState.community_cards));
       let ourHand = JSON.parse(res2.getBody('utf-8'));
-      if (ourHand.rank > communityHand.rank) {
+      if (ourHand.rank > sharedHand.rank) {
         return ourHand.rank * 15;
       }
-      return communityHand.rank * 10;
+      return sharedHand.rank * 10;
     } catch (e) {
       console.error(e);
     }
@@ -34,7 +34,7 @@ class Player {
   }
 
   static rateCards(gameState) {
-    if (gameState.community_cards.length < 6) {
+    if (gameState.community_cards.length < 3) {
       let player = gameState.players[gameState.in_action];
       let cards = player.hole_cards;
       let card1value = this.toValue(cards[0]);
@@ -68,7 +68,6 @@ class Player {
     else if (card.rank === "A") {
       return 14;
     }
-    console.log("rank", card.rank, parseInt(card.rank));
     return parseInt(card.rank);
   }
 
@@ -76,7 +75,6 @@ class Player {
     let player = gameState.players[gameState.in_action];
     let stacks = gameState.players.map(player => player.stack);
     let score = this.rateCards(gameState);
-    console.log("score", score);
     let multiplier = player.stack >= 2000 ? 2 : 1;
 
     console.log("stacks", stacks);
