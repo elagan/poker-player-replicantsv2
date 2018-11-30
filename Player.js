@@ -3,7 +3,7 @@ const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
-    return '0.17';
+    return '0.18';
   }
 
   static getRank(gameState) {
@@ -48,6 +48,7 @@ class Player {
         return 10;
       }
       else if (card1value > 10 || card2value > 10) {
+        //return Math.round((card1value + card2value) / 1.5);
         return card1value + card2value;
       }
     }
@@ -89,11 +90,8 @@ class Player {
     else if (score >= 70) {
       bet(player.stack);
     }
-    else if (score >= 30) {
+    else if (score >= 40) {
       bet(this.raiseOrMaxStack(gameState.minimum_raise + score * MIN_BET * 8 * multiplier, player));
-    }
-    else if (score >= 25) {
-      bet(this.raiseOrMaxStack(gameState.minimum_raise + MIN_BET * 6 * multiplier, player));
     }
     else if (score >= 20) {
       bet(this.raiseOrMaxStack(gameState.minimum_raise + MIN_BET * 4 * multiplier, player));
