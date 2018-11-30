@@ -1,5 +1,5 @@
 const request = require('sync-request');
-const MIN_BET = 10;
+const MIN_BET = 20;
 
 class Player {
   static get VERSION() {
@@ -18,7 +18,6 @@ class Player {
         return 1;
       }
     }
-    console.log(cards);
     try {
       let res = request('GET', 'http://rainman.leanpoker.org/rank?cards=' + JSON.stringify(cards));
       let a = JSON.parse(res.getBody('utf-8'));
